@@ -4,9 +4,9 @@ var React = require('react');
 
 module.exports = React.createClass({
   render: function() {
-    var trackList = this.props.tracks.map( function(track) {
+    var trackList = this.props.tracks.map( function(track, index) {
       return <tr>
-        <th>1</th>
+        <th>{index+1}</th>
         <td>{track.name}</td>
         <td>{track.duration}</td>
       </tr>;
