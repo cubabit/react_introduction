@@ -19814,14 +19814,7 @@ module.exports = require('./lib/React');
 
 var React = require('react');
 
-var albums = [ {
-  image: "http://a.espncdn.com/photo/2013/0204/jackson/3-1920X1920.jpg",
-  title: "Thriller",
-  description: "Micheal Jackson biggest album",
-  tracks: [ {name: "Wanna Be Startin Somethin", duration: "6:03"}, {name: "Baby Be Mine", duration: "4:20"}, {name: "The Girl Is Mine", duration: "3:42"} ]
-} ];
-
-var Album = React.createClass({displayName: "Album",
+module.exports = React.createClass({displayName: "exports",
   render: function() {
     var trackList = this.props.tracks.map( function(track) {
       return React.createElement("tr", null, 
@@ -19829,10 +19822,9 @@ var Album = React.createClass({displayName: "Album",
         React.createElement("td", null, track.name), 
         React.createElement("td", null, track.duration)
       );
-
     } ); 
-    return React.createElement("div", {className: "col-sm-4"}, 
-        React.createElement("div", {className: "thumbnail"}, 
+
+    return React.createElement("div", {className: "thumbnail"}, 
           React.createElement("img", {src: this.props.image, alt: this.props.title, width: "400", height: "400"}), 
           React.createElement("div", {className: "caption"}, 
             React.createElement("h3", null, this.props.title), 
@@ -19841,11 +19833,85 @@ var Album = React.createClass({displayName: "Album",
               trackList
             )
           )
+        );
+  }
+});
+
+},{"react":156}],158:[function(require,module,exports){
+"use strict";
+
+var React = require('react');
+var Album = require('./album');
+
+
+module.exports = React.createClass({displayName: "exports",
+  render: function() {
+    var albumList = this.props.albums.map( function(album) {
+      return React.createElement("div", {className: "col-sm-4"}, 
+                React.createElement(Album, React.__spread({},  album))
+            );
+    } ); 
+    
+    return React.createElement("div", null, albumList);
+  }
+});
+
+},{"./album":157,"react":156}],159:[function(require,module,exports){
+"use strict";
+
+var React = require('react');
+var AlbumList = require('./albumList.js');
+
+module.exports = React.createClass({displayName: "exports",
+  onSearchChange: function(event) {
+      var updatedList = this.props.albums.filter(function(album) {
+        return album.title.toLowerCase().search(event.target.value.toLowerCase()) !== -1;
+      });
+
+      this.setState({ albums: updatedList });
+  },
+  componentWillMount: function() {
+    this.setState({albums: this.props.albums});
+  },
+  render: function() {
+    return React.createElement("div", {className: "container"}, 
+      React.createElement("div", {className: "row"}, 
+        React.createElement("div", {className: "col-sm-10 col-sm-offset-1 form-group"}, 
+          React.createElement("input", {type: "text", placeholder: "Search", className: "form-control", onChange: this.onSearchChange})
         )
+      ), 
+      React.createElement("div", {className: "row"}, 
+        React.createElement(AlbumList, {albums: this.state.albums})
+      )
     );
   }
 });
 
-React.render(React.createElement(Album, React.__spread({},  albums[0])), document.getElementById('app'));
+},{"./albumList.js":158,"react":156}],160:[function(require,module,exports){
+"use strict";
 
-},{"react":156}]},{},[157]);
+var React = require('react');
+var AlbumPage = require('./components/albumPage');
+
+var albumsData = [ {
+    image: "http://a.espncdn.com/photo/2013/0204/jackson/3-1920X1920.jpg",
+    title: "Thriller",
+    description: "Micheal Jackson biggest album",
+    tracks: [ {name: "Wanna Be Startin Somethin", duration: "6:03"}, {name: "Baby Be Mine", duration: "4:20"}, {name: "The Girl Is Mine", duration: "3:42"} ]
+  }, 
+  {
+    image: "https://s3.amazonaws.com/images.sheetmusicdirect.com/Product/smd_132962/large.jpg",
+    title: "Rio",
+    description: "Duran Duran's biggest album",
+    tracks: [ {name: "Rio", duration: "3:36"}, {name: "My Own Way", duration: "4:20"}, {name: "Lonely In Your Nightmare", duration: "3:49"} ]
+  }, 
+  {
+    image: "http://classicrock.net/wp-content/uploads/2014/05/adam-and-the-ants.jpg",
+    title: "Kings of the Wild Frontier",
+    description: "Adam's biggest album",
+    tracks: [ {name: "Dog Eat Dog", duration: "3:36"}, {name: "'Antmusic'", duration: "4:20"}, {name: "Feed Me to the Lions", duration: "3:49"} ]
+  } ];
+
+React.render(React.createElement(AlbumPage, {albums: albumsData}), document.getElementById('app'));
+
+},{"./components/albumPage":159,"react":156}]},{},[160]);
