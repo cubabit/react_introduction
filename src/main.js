@@ -2,19 +2,31 @@
 
 var React = require('react');
 
+var albums = [ {
+  image: "http://a.espncdn.com/photo/2013/0204/jackson/3-1920X1920.jpg",
+  title: "Thriller",
+  description: "Micheal Jackson biggest album",
+  tracks: [ {name: "Wanna Be Startin Somethin", duration: "6:03"}, {name: "Baby Be Mine", duration: "4:20"}, {name: "The Girl Is Mine", duration: "3:42"} ]
+} ];
 
 var Album = React.createClass({
   render: function() {
+    var trackList = this.props.tracks.map( function(track) {
+      return <tr>
+        <th>1</th>
+        <td>{track.name}</td>
+        <td>{track.duration}</td>
+      </tr>;
+
+    } ); 
     return <div className="col-sm-4"> 
         <div className="thumbnail">
-          <img src="http://a.espncdn.com/photo/2013/0204/jackson/3-1920X1920.jpg" alt="thriller" width="400" height="400" />
+          <img src={this.props.image} alt={this.props.title} width="400" height="400" />
           <div className="caption">
-            <h3>Thriller</h3>
-            <p>Micheal Jackson biggest album</p>
-            <table className="table table-striped">
-              <tr><th>1</th><td>Wanna Be Startin Somethin</td><td>6:03</td></tr>
-              <tr><th>2</th><td>Baby Be Mine</td><td>4:20</td></tr>
-              <tr><th>3</th><td>The Girl Is Mine</td><td>3:42</td></tr>
+            <h3>{this.props.title}</h3>
+            <p>{this.props.description}</p>
+            <table className="table table-striped">              
+              {trackList}
             </table>
           </div>
         </div>
@@ -22,5 +34,4 @@ var Album = React.createClass({
   }
 });
 
-
-React.render(<div><Album /><Album /></div>, document.getElementById('app'));
+React.render(<Album {...albums[0]} />, document.getElementById('app'));

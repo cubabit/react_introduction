@@ -19814,19 +19814,31 @@ module.exports = require('./lib/React');
 
 var React = require('react');
 
+var albums = [ {
+  image: "http://a.espncdn.com/photo/2013/0204/jackson/3-1920X1920.jpg",
+  title: "Thriller",
+  description: "Micheal Jackson biggest album",
+  tracks: [ {name: "Wanna Be Startin Somethin", duration: "6:03"}, {name: "Baby Be Mine", duration: "4:20"}, {name: "The Girl Is Mine", duration: "3:42"} ]
+} ];
 
 var Album = React.createClass({displayName: "Album",
   render: function() {
+    var trackList = this.props.tracks.map( function(track) {
+      return React.createElement("tr", null, 
+        React.createElement("th", null, "1"), 
+        React.createElement("td", null, track.name), 
+        React.createElement("td", null, track.duration)
+      );
+
+    } ); 
     return React.createElement("div", {className: "col-sm-4"}, 
         React.createElement("div", {className: "thumbnail"}, 
-          React.createElement("img", {src: "http://a.espncdn.com/photo/2013/0204/jackson/3-1920X1920.jpg", alt: "thriller", width: "400", height: "400"}), 
+          React.createElement("img", {src: this.props.image, alt: this.props.title, width: "400", height: "400"}), 
           React.createElement("div", {className: "caption"}, 
-            React.createElement("h3", null, "Thriller"), 
-            React.createElement("p", null, "Micheal Jackson biggest album"), 
+            React.createElement("h3", null, this.props.title), 
+            React.createElement("p", null, this.props.description), 
             React.createElement("table", {className: "table table-striped"}, 
-              React.createElement("tr", null, React.createElement("th", null, "1"), React.createElement("td", null, "Wanna Be Startin Somethin"), React.createElement("td", null, "6:03")), 
-              React.createElement("tr", null, React.createElement("th", null, "2"), React.createElement("td", null, "Baby Be Mine"), React.createElement("td", null, "4:20")), 
-              React.createElement("tr", null, React.createElement("th", null, "3"), React.createElement("td", null, "The Girl Is Mine"), React.createElement("td", null, "3:42"))
+              trackList
             )
           )
         )
@@ -19834,7 +19846,6 @@ var Album = React.createClass({displayName: "Album",
   }
 });
 
-
-React.render(React.createElement("div", null, React.createElement(Album, null), React.createElement(Album, null)), document.getElementById('app'));
+React.render(React.createElement(Album, React.__spread({},  albums[0])), document.getElementById('app'));
 
 },{"react":156}]},{},[157]);
