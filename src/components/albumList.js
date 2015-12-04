@@ -14,6 +14,10 @@ module.exports = React.createClass({
       );
     } );
 
+    if (!albumList.length) {
+      return <h3>No matching albums</h3>;
+    }
+
     var rowifiedAlbumList = [], rowLength = 3;
 
     for (var i = 0; i < albumList.length; i += rowLength) {
