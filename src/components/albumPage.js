@@ -21,9 +21,7 @@ module.exports = React.createClass({
           <input type="text" placeholder="Search" className="form-control" onChange={this.onSearchChange} />
         </div>
       </div>
-      <div className="row">
-        <AlbumList albums={this.state.albums}/>
-      </div>
+      <AlbumList albums={this.state.albums}/>
     </div>;
   }
 });
