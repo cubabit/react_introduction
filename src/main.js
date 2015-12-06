@@ -6,11 +6,13 @@ var ReactDOM = require('react-dom');
 
 var Header = React.createClass({
   displayName: "Header",
+
   render: function render() {
-    return React.createElement(
-      "div",
-      null,
-      "Mix Tape"
+
+    return (
+      <div className="page-header">
+        <h1>Mix Tape <small>classic 80s</small></h1>
+      </div>
     );
   }
 });
