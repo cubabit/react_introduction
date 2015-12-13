@@ -65,11 +65,3 @@ it using the ES6 spread operator:
 ```
 React.createElement(<Component {...myObject} />)
 ```
-
-You may also wonder how to iterate over the tracks? Just remember React components are JavaScript
-files and you can insert React JSX tags inside other JSX tags!
-
-```js
-var subHeader = <small>(world!)</small>;
-return <h1>Hello {subHeader}</h1>;
-```
