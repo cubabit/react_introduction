@@ -62,7 +62,7 @@ var albumsData = [{
 }, {
   image: "https://images.rapgenius.com/6ecac4be30233f4383b95e704b0f7f39.800x800x1.jpg",
   title: "Slippery When Wet",
-  description: "Amaerican pop rock",
+  description: "American pop rock",
   tracks: [{
     name: "Let it Rock",
     duration: "5:27"
@@ -72,6 +72,20 @@ var albumsData = [{
   }, {
     name: "Livin' on a Prayer",
     duration: "4:09"
+  }]
+}, {
+  image: "http://www.vintagevinyljournals.com/wp-content/uploads/2011/10/madonna-trueblue-cover.jpg",
+  title: "True Blue",
+  description: "Madonna's third album",
+  tracks: [{
+    name: "Papa Don't Preach",
+    duration: "4:29"
+  }, {
+    name: "Open Your Heart",
+    duration: "4:13"
+  }, {
+    name: "White Heat",
+    duration: "4:40"
   }]
 }];
 
