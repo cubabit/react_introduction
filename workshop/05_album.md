@@ -1,4 +1,4 @@
-# Creating a component
+# Challenge - Creating a component
 
 Let's create a component to display a classic 80's album. Here is some HTML using the bootstrap CSS
 framework to showcase the first three tracks of the Michael Jackson album <em>Thriller</em>.
