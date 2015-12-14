@@ -1,6 +1,6 @@
 # Create a list of albums
 
-React components are simple JavaScript objects. The React component you render can include other
+React components are simply JavaScript objects. The React component you render can include other
 React elements. If you need to do templating operations such as loops, simply call a function on the
 object that returns React elements.
 
@@ -40,8 +40,11 @@ var List = React.createClass({
 ReactDOM.render(<List items={itemList} />, document.getElementById('app'));
 ```
 
-Remeber the `()`s as you are invoking the function! You can use this technique for the
-track-listings in the previous exercise if you did not use a loop.
+Remember the `()`s as you are invoking the function! Also, note the *key* attribute; React warns if
+you do supply this as it wants you to uniquely identify items that are repeated.
+
+You can use this technique for the track-listings in the previous exercise if you hard-coded the
+three tracks into the template.
 
 Now, use the array below to make a list of albums. If you wrap the album in bootstrap *col* divs
 then you may need to work out how to also include the *row* divs at appropriate points. Again,
