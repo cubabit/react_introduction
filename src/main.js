@@ -11,38 +11,31 @@ var itemList = [
 
 
 var ListItem = React.createClass({
+  componentWillMount: function () {
+    this.setState({
+      isCompleted: this.props.isCompleted
+    });
+  },
+  handleCheckboxClick: function (event) {
+    this.setState({isCompleted: !this.state.isCompleted});
+  },
+
   render: function () {
     return (
       <div>
-        <input type="checkbox" checked={this.props.checked} /> {this.props.label}
+        <input type="checkbox" checked={this.state.isCompleted} onClick={this.handleCheckboxClick} /> {this.props.label}
       </div>
     );
-
   }
 });
 
 var List = React.createClass({
-  
-  handleChechboxClick: function(elem) {
-    elem.isCompleted = !elem.isCompleted;
-
-    this.setState({ items: this.state.items });
-    // var updatedList = this.props.albums.filter(function(album) {
-    //     return album.title.toLowerCase().search(event.target.value.toLowerCase()) !== -1;
-    //   });
-
-    // this.setState({ albums: updatedList });
-  },
-  componentWillMount: function() {
-    this.setState({items: this.props.list});
-  },
-
   listElements: function () {
-    return this.state.items.map(function (elem, index) {
+    return this.props.list.map(function (elem, index) {
       return (
-        <li key={index} onClick={this.handleChechboxClick.bind(this, elem)}><ListItem label={elem.label} checked={elem.isCompleted} /></li>
+        <li key={index}><ListItem label={elem.label} isCompleted={elem.isCompleted} /></li>
       );
-    }.bind(this));
+    });
   },
 
   render: function () {
