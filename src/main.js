@@ -21,9 +21,16 @@ var ListItem = React.createClass({
   },
 
   render: function () {
+    var label;
+    if (this.state.isCompleted) {
+      label = <s>{this.props.label}</s>
+    } else {
+      label = <span>{this.props.label}</span>
+    } 
+
     return (
       <div>
-        <input type="checkbox" checked={this.state.isCompleted} onClick={this.handleCheckboxClick} /> {this.props.label}
+        <input type="checkbox" checked={this.state.isCompleted} onClick={this.handleCheckboxClick} /> {label}
       </div>
     );
   }
