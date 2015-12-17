@@ -1,92 +1,59 @@
 "use strict";
 
 var React = require('react');
-var AlbumPage = require('./components/albumPage');
+var ReactDOM = require('react-dom');
 
-var albumsData = [{
-  image: "http://a.espncdn.com/photo/2013/0204/jackson/3-1920X1920.jpg",
-  title: "Thriller",
-  description: "Micheal Jackson biggest album",
-  tracks: [{
-    name: "Wanna Be Startin Somethin'",
-    duration: "6:03"
-  }, {
-    name: "Baby Be Mine",
-    duration: "4:20"
-  }, {
-    name: "The Girl Is Mine",
-    duration: "3:42"
-  }]
-}, {
-  image: "https://s3.amazonaws.com/images.sheetmusicdirect.com/Product/smd_132962/large.jpg",
-  title: "Rio",
-  description: "Duran Duran's biggest album",
-  tracks: [{
-    name: "Rio",
-    duration: "3:36"
-  }, {
-    name: "My Own Way",
-    duration: "4:20"
-  }, {
-    name: "Lonely In Your Nightmare",
-    duration: "3:49"
-  }]
-}, {
-  image: "http://classicrock.net/wp-content/uploads/2014/05/adam-and-the-ants.jpg",
-  title: "Kings of the Wild Frontier",
-  description: "Adam's biggest album",
-  tracks: [{
-    name: "Dog Eat Dog",
-    duration: "3:36"
-  }, {
-    name: "'Antmusic'",
-    duration: "4:20"
-  }, {
-    name: "Feed Me to the Lions",
-    duration: "3:49"
-  }]
-}, {
-  image: "http://www.rhino.com/sites/default/files/BrothersDireStraits.png",
-  title: "Brothers in Arms",
-  description: "Classic 80s rock from the Straits",
-  tracks: [{
-    name: "So Far Away",
-    duration: "5:12"
-  }, {
-    name: "Money For Nothing",
-    duration: "8:26"
-  }, {
-    name: "Walk Of Live",
-    duration: "4:12"
-  }]
-}, {
-  image: "https://images.rapgenius.com/6ecac4be30233f4383b95e704b0f7f39.800x800x1.jpg",
-  title: "Slippery When Wet",
-  description: "American pop rock",
-  tracks: [{
-    name: "Let it Rock",
-    duration: "5:27"
-  }, {
-    name: "You Give Love a Bad Name",
-    duration: "3:42"
-  }, {
-    name: "Livin' on a Prayer",
-    duration: "4:09"
-  }]
-}, {
-  image: "http://www.vintagevinyljournals.com/wp-content/uploads/2011/10/madonna-trueblue-cover.jpg",
-  title: "True Blue",
-  description: "Madonna's third album",
-  tracks: [{
-    name: "Papa Don't Preach",
-    duration: "4:29"
-  }, {
-    name: "Open Your Heart",
-    duration: "4:13"
-  }, {
-    name: "White Heat",
-    duration: "4:40"
-  }]
-}];
+var itemList = [
+  {label: 'Get shopping', isCompleted: false},
+  {label: 'Put out rubbish', isCompleted: false},
+  {label: 'Watch Breaking Bad', isCompleted: true}
+];
 
-React.render(<AlbumPage albums={albumsData} />, document.getElementById('app'));
+
+var ListItem = React.createClass({
+  render: function () {
+    return (
+      <div>
+        <input type="checkbox" checked={this.props.checked} /> {this.props.label}
+      </div>
+    );
+
+  }
+});
+
+var List = React.createClass({
+  
+  handleChechboxClick: function(elem) {
+    elem.isCompleted = !elem.isCompleted;
+
+    this.setState({ items: this.state.items });
+    // var updatedList = this.props.albums.filter(function(album) {
+    //     return album.title.toLowerCase().search(event.target.value.toLowerCase()) !== -1;
+    //   });
+
+    // this.setState({ albums: updatedList });
+  },
+  componentWillMount: function() {
+    this.setState({items: this.props.list});
+  },
+
+  listElements: function () {
+    return this.state.items.map(function (elem, index) {
+      return (
+        <li key={index} onClick={this.handleChechboxClick.bind(this, elem)}><ListItem label={elem.label} checked={elem.isCompleted} /></li>
+      );
+    }.bind(this));
+  },
+
+  render: function () {
+    return (
+      <ul>
+        {this.listElements()}
+      </ul>
+    );
+  }
+});
+
+ReactDOM.render(<List list={itemList} />, document.getElementById('app'));
+
+
